@@ -24,11 +24,11 @@ try {
     echo "Notice raised: " . $e->getMessage();
 }
 ...
-// If you catch E_WARNING, you also catch E_NOTICE:
+// If you catch E_NOTICE, you also catch E_WARNING:
 try {
-    echo $undefinedVariable;
-} catch (E_WARNING $e) {
-    echo "Warning or better raised: " . $e->getMessage();
+    fopen("non-existed", "r");
+} catch (E_NOTICE $e) {
+    echo "Warning or worse raised: " . $e->getMessage();
 }
 ...
 // You could not to catch anything, so a notice will cause script termination.
