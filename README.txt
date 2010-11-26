@@ -45,7 +45,7 @@ It is handy to use this library during web script development process. You
 should develop in error_reporting = E_ALL mode and keep in mind that even a 
 small notice during the developement often causes a fatal error.
 
-A typical example when notices may be lost — a script which generates a 
+A typical example when notices may be lost - a script which generates a 
 redirect to some other URL. This notice will be lost, when the buferization 
 is turned on (ob_start()).
 
