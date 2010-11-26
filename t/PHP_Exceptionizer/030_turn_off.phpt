@@ -3,7 +3,6 @@ PHP_Exceptionizer: turn off Exceptionizer
 --FILE--
 <?php
 require dirname(__FILE__) . '/init.php';
-if (function_exists('xdebug_disable')) xdebug_disable();
 $exceptionizer = null;
 echo $undefinedVar;
 ?>

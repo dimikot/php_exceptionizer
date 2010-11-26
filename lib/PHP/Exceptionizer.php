@@ -55,12 +55,12 @@ class PHP_Exceptionizer_Catcher
         $types = array(
             "E_ERROR", "E_WARNING", "E_PARSE", "E_NOTICE", "E_CORE_ERROR",
             "E_CORE_WARNING", "E_COMPILE_ERROR", "E_COMPILE_WARNING",
-            "E_USER_ERROR", "E_USER_WARNING", "E_USER_NOTICE", "E_STRICT",
-            "E_RECOVERABLE_ERROR"
+            "E_USER_ERROR", "E_USER_WARNING", "E_USER_NOTICE", "E_STRICT", 
+            "E_RECOVERABLE_ERROR", "E_DEPRECATED", "E_USER_DEPRECATED",
         );
         $className = "E_EXCEPTION";
         foreach ($types as $t) {
-            $e = constant($t);
+            $e = @constant($t);
             if ($errno & $e) {
                 $className = $t;
                 break;
@@ -85,7 +85,8 @@ abstract class PHP_Exceptionizer_Exception extends Exception
  * The logic is: if we catch E_WARNING, we also need NOT to pass out
  * E_NOTICE, but we must let E_ERROR to be passed thru.
  */
-class E_CORE_ERROR extends PHP_Exceptionizer_Exception {}
+class E_EXCEPTION extends PHP_Exceptionizer_Exception {}
+class E_CORE_ERROR extends E_EXCEPTION {}
     class E_CORE_WARNING extends E_CORE_ERROR {}
     class E_COMPILE_ERROR extends E_CORE_ERROR {}
         class E_COMPILE_WARNING extends E_COMPILE_ERROR {}
@@ -95,6 +96,8 @@ class E_CORE_ERROR extends PHP_Exceptionizer_Exception {}
                 class E_WARNING extends E_PARSE {}
                     class E_NOTICE extends E_WARNING {}
                         class E_STRICT extends E_NOTICE {}
+                            class E_DEPRECATED extends E_STRICT {}
     class E_USER_ERROR extends E_ERROR {}
         class E_USER_WARNING extends E_USER_ERROR {}
             class E_USER_NOTICE extends E_USER_WARNING {}
+                class E_USER_DEPRECATED extends E_USER_NOTICE {}
