@@ -82,8 +82,8 @@ abstract class PHP_Exceptionizer_Exception extends Exception
 }
 
 /**
- * The logic is: if we catch E_WARNING, we also need NOT to pass out
- * E_NOTICE, but we must let E_ERROR to be passed thru.
+ * The logic is: if we catch E_NOTICE, we also need to catch WORSE
+ * errors (like E_WARNING).
  */
 class E_EXCEPTION extends PHP_Exceptionizer_Exception {}
 class E_CORE_ERROR extends E_EXCEPTION {}
